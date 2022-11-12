@@ -46,17 +46,28 @@ namespace Example_631_IntroFiles
                     Console.WriteLine("Введите ФИО:");
                     note += $"{Console.ReadLine()}" + '#';
 
-                    //Возраст
-                    Console.WriteLine("Введите Возраст:");
-                    note += $"{Console.ReadLine()}" + '#';
-
                     //Рост
                     Console.WriteLine("Введите Рост:");
                     note += $"{Console.ReadLine()}" + '#';
 
                     //Дату рождения
-                    Console.WriteLine("Дату рождения:");
-                    note += $"{Console.ReadLine()}" + '#';
+                        DateTime dob; // date of birth
+                        string input;
+                        do
+                        {
+                            Console.WriteLine("Введите дату рождения в формате дд.ММ.гггг (день.месяц.год):");
+                            input = Console.ReadLine();
+                        }
+                        while (!DateTime.TryParseExact(input, "dd.MM.yyyy", null, DateTimeStyles.None, out dob));
+                    note += $"{dob}" + '#';
+
+                    //Возраст
+                    DateTime nowx = new DateTime();
+                    nowx = DateTime.Today;
+                    TimeSpan cute = nowx.Subtract(dob);     
+                    int abc = Convert.ToInt32(cute.TotalDays);
+                    abc = abc / 365;
+                    note += $"{abc}" + '#';
 
                     //Место рождения
                     Console.WriteLine("Введите место рождения:");
@@ -90,9 +101,9 @@ namespace Example_631_IntroFiles
                     Console.WriteLine($"№{dope[0]} " +
                         $"Дата:{dope[1]} " +
                         $"ФИО:{dope[2]} " +
-                        $"Лет:{dope[3]} " +
-                        $"Рост:{dope[4]} " +
-                        $"Д.Рождения:{dope[5]} " +
+                        $"Рост:{dope[3]} " +
+                        $"Д.Рождения:{dope[4]} " +
+                        $"Возраст:{dope[5]} " +
                         $"Место Рождения:{dope[6]} ");
                 }
                 Console.ReadKey();
